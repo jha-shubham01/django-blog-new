@@ -4,28 +4,30 @@
   <h3 class="my-3 border-bottom">Blogs</h3>
 
   {% for post in post_list %}
-  <div class="card mb-3">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img
-          src="{{ post.image.url }}"
-          class="img-fluid rounded-start"
-          alt="{{ post.title }}"
-        />
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title|title }}</h5>
-          <p class="card-text">
-            {{ post.content|safe|linebreaksbr|truncatechars:200 }}
-          </p>
-          <small class="text-body-secondary">
-            {{ post.author.username|title }} - {{ post.created_on|date:"M d, Y" }}
-          </small>
+  <a href="{% url 'post_detail' pk=post.pk %}" class="text-decoration-none">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="{{ post.image.url }}"
+            class="img-fluid rounded-start"
+            alt="{{ post.title }}"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title|title }}</h5>
+            <p class="card-text">
+              {{ post.content|safe|linebreaksbr|truncatechars:200 }}
+            </p>
+            <small class="text-body-secondary">
+              {{ post.author.username|title }} - {{ post.created_on|date:"M d, Y" }}
+            </small>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </a>
   {% endfor %}
   <nav aria-label="...">
     <ul class="pagination">
