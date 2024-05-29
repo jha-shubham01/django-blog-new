@@ -22,6 +22,9 @@ class PostDraftList(LoginRequiredMixin, generic.ListView):
     login_url = reverse_lazy("login")
     ordering = "-created_on"
     queryset = Post.objects.filter(status=StatusChoices.DRAFT.value)
+    paginate_by = 10
+    # default template name: modelname_list
+    # template_name = "blog/post_list"
 
     def get_queryset(self):
         return super().get_queryset().filter(author=self.request.user)
@@ -31,6 +34,9 @@ class PostArchivedList(LoginRequiredMixin, generic.ListView):
     login_url = reverse_lazy("login")
     ordering = "-created_on"
     queryset = Post.objects.filter(status=StatusChoices.ARCHIVE.value)
+    paginate_by = 10
+    # default template name: modelname_list
+    # template_name = "blog/post_list"
 
     def get_queryset(self):
         return super().get_queryset().filter(author=self.request.user)
@@ -84,6 +90,13 @@ class CommentFormView(LoginRequiredMixin, generic.FormView):
 
 
 class PostDetailCommentView(View):
+    """References:
+    https://docs.djangoproject.com/en/5.0/topics/class-based-views/mixins/#using-formmixin-with-detailview
+    https://stackoverflow.com/questions/45659986/django-implementing-a-form-within-a-generic-detailview
+
+    Design reference: https://www.bootdey.com/snippets/view/Blog-Detail-App#html
+    """
+
     def get(self, request, *args, **kwargs):
         view = PostDetail.as_view()
         return view(request, *args, **kwargs)
