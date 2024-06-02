@@ -8,7 +8,7 @@ urlpatterns = [
     path("archive", views.PostArchivedList.as_view(), name="post_archive_list"),
     # path("post/<int:pk>/", views.PostDetail.as_view(), name="post_detail"),
     path("post/<int:pk>/", views.PostDetailCommentView.as_view(), name="post_detail"),
-    # path("post/new/", views.CreatePost.as_view(), name="post_new"),
+    path("post/new/", views.CreatePost.as_view(), name="post_new"),
     # path(
     #     "post/<int:pk>/edit/", views.PostUpdateView.as_view(), name="post_edit"
     # ),
