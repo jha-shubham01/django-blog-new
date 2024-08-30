@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
+User = get_user_model()
 
 class CreateUpdateTimeStampModel(models.Model):
-
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -35,7 +35,6 @@ class StatusChoices(models.TextChoices):
 
 
 class Post(CreateUpdateTimeStampModel):
-
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
